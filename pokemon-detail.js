@@ -161,4 +161,42 @@ function displayPokemonDetails(pokemon) {
   const capitalizePokemonName = capitalizeFirstLetter(name);
 
   document.querySelector("title").textContent = capitalizePokemonName;
+
+  const detailMainElement = document.querySelector("detail-main");
+  detailMainElement.classList.add(name.toLowerCase());
+
+  document.querySelector("name-wrap .name").textContent = capitalizePokemonName;
+
+  document.querySelector(
+    ".pokemon-id-wrap .body2-fonts"
+  ).textContent = `#${String(id).padStart(3, "0")}`;
+
+  const imageElement = document.querySelector(".detail-img-wrapper img");
+  imageElement.src = `https://raw.githubusercontent.com/pokeapi/sprites/master/sprites/other/dream-world/${id.svg}`;
+
+  const typeWrapper = document.querySelector(".power-wrapper");
+  typeWrapper.innerHTML = "";
+  types.forEach(({ type }) => {
+    createAndAppendElement(typeWrapper, "p", {
+      className: `body3-fonts type ${type.name}`,
+      textContent: type.name,
+    });
+  });
+
+  document.querySelector(
+    ".pokemon-detail-wrap .pokemon-detail p.body3-fonts.weight"
+  ).textContent = `${weight / 10} kg`;
+  document.querySelector(
+    ".pokemon-detail-wrap .pokemon-detail p.body3-fonts.height"
+  ).textContent = `${height / 10} m`;
+
+  const abilitiesWrapper = document.querySelector(
+    ".pokemon-detail-wrap .pokemon-detail=move"
+  );
+  abilities.forEach(({ ability }) => {
+    createAndAppendElement(abilitiesWrapper, "p", {
+      className: "body3-fonts",
+      textContent: ability.name,
+    });
+  });
 }
